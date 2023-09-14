@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "2321270507",
+    "project_id": "padho-52dba",
+    "storage_bucket": "padho-52dba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2321270507:android:2d5102b871c0fe8e88a0ae",
+        "android_client_info": {
+          "package_name": "com.example.padho"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2321270507-ntf9s00mhgbogqa22i7jkvits1jari8g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsd3GIm1kZpJcVe8UYn4oPiLn03E0qXEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2321270507-ntf9s00mhgbogqa22i7jkvits1jari8g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
