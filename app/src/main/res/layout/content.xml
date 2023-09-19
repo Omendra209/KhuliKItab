@@ -35,7 +35,7 @@
 
 
 
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="2in"
             android:background="@drawable/boarder"
@@ -43,16 +43,16 @@
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
 
-<!--            <ImageView-->
-<!--                android:id="@+id/imageView9"-->
-<!--                android:layout_width="387dp"-->
-<!--                android:layout_height="290dp"-->
-<!--                android:src="@drawable/video_logo">-->
-<!--                -->
-<!--            </ImageView>-->
+            <VideoView
+                android:id="@+id/Vid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/video_logo">
+
+            </VideoView>
 
 
-        </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

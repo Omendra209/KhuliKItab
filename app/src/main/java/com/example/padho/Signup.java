@@ -17,12 +17,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Signup extends AppCompatActivity {
-    private EditText Password;
-    private EditText email;
-    private EditText ConfirmPassword;
-    private EditText UserName;
-    private Button signup_button;
-    private FirebaseAuth Auth;
+    private EditText Password,  email, ConfirmPassword, UserName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,36 +27,28 @@ public class Signup extends AppCompatActivity {
         email = findViewById(R.id.EmailSignup);
         Password = findViewById(R.id.PasswordSignup);
         ConfirmPassword = findViewById(R.id.ConfirmPasswordSignup);
-        signup_button = findViewById(R.id.SignupButton);
-        Auth = FirebaseAuth.getInstance();
-        signup_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        Button signup_button = findViewById(R.id.SignupButton);
+        signup_button.setOnClickListener(v ->{
                 String emailS = email.getText().toString();
                 String passwordS1 = Password.getText().toString();
                 String passwordS2 = ConfirmPassword.getText().toString();
                 String usernameS = UserName.getText().toString();
-                if(TextUtils.isEmpty(emailS) || TextUtils.isEmpty(passwordS1) || TextUtils.isEmpty(passwordS2) || TextUtils.isEmpty(usernameS))
-                {
+                if(TextUtils.isEmpty(emailS) || TextUtils.isEmpty(passwordS1) || TextUtils.isEmpty(passwordS2) || TextUtils.isEmpty(usernameS)) {
                     Toast.makeText(Signup.this, "Enter All Details First", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (!passwordS1.equals(passwordS2)) {
+                        Toast.makeText(Signup.this, "Password not match", Toast.LENGTH_SHORT).show();
+                    } else {
+                        SignupUser(emailS,passwordS1);
+                    }
                 }
-                if (!passwordS1.equals(passwordS2))
-                {
-                    Toast.makeText(Signup.this, "Password not match", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    SignupUser(emailS,passwordS1);
-                }
-            }
-        });
+            });
 
     }
-    private void SignupUser(String Email,String Password)
-    {
-        Auth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(Signup.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+    private void SignupUser(String Email,String Password) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.createUserWithEmailAndPassword(Email,Password)
+                .addOnCompleteListener(Signup.this, task -> {
                 if(task.isSuccessful()){
                     Toast.makeText(Signup.this, "User SuccessFully created", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Signup.this,Login.class));
@@ -69,7 +57,6 @@ public class Signup extends AppCompatActivity {
                     Exception e = task.getException();
                     Toast.makeText(Signup.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
+            });
     }
 }

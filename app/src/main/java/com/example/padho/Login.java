@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
     private EditText Email;
@@ -30,6 +31,14 @@ public class Login extends AppCompatActivity {
         Password = findViewById(R.id.PasswordLogin);
         LoginU = findViewById(R.id.LoginButton);
         Auth=FirebaseAuth.getInstance();
+
+        // For user stay login
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user!=null){
+            Intent intent = new Intent(Login.this,Subject.class);
+            startActivity(intent);
+            finish();
+        }
         LoginU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,7 +62,7 @@ public class Login extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful())
                 {
-                    startActivity(new Intent(Login.this, Dashboard.class));
+                    startActivity(new Intent(Login.this, Subject.class));
                 }
                 else
                 {

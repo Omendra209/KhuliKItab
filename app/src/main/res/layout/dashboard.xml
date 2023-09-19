@@ -47,7 +47,7 @@
 
 
         <EditText
-            android:id="@+id/editTextText11"
+            android:id="@+id/SearchBar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -93,13 +93,14 @@
             android:orientation="horizontal">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/Class1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/boarder">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/imageView3"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
@@ -129,6 +130,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/Class2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -178,33 +180,18 @@
                 android:layout_weight="1"
                 android:background="@drawable/boarder">
 
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/baseline_book_24"
-                    app:layout_constraintBottom_toTopOf="@+id/textView9"
+                <Button
+                    android:id="@+id/MathClass"
+                    android:layout_width="179dp"
+                    android:layout_height="141dp"
+                    android:background="@drawable/math"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Class 3"
-                    android:textColor="#828782"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView5"
-                    app:layout_constraintStart_toStartOf="@+id/imageView5"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+                </Button>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -214,33 +201,16 @@
                 android:layout_weight="1"
                 android:background="@drawable/boarder">
 
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:src="@drawable/baseline_book_24"
-                    app:layout_constraintBottom_toTopOf="@+id/textView10"
+                <Button
+                    android:layout_width="172dp"
+                    android:layout_height="152dp"
+                    android:background="@drawable/math"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Class 4"
-                    android:textColor="#828782"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView6"
-                    app:layout_constraintStart_toStartOf="@+id/imageView6"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+                </Button>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -12,20 +13,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Padho"
         tools:targetApi="31">
-        <activity
-            android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Login"></activity>
         <activity android:name=".Signup"></activity>
-        <activity android:name=".dash" android:exported="true">
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
         <activity android:name=".Dashboard"></activity>
+        <activity android:name=".ChapterList"></activity>
+        <activity android:name=".ClassPage"></activity>
+        <activity android:name=".Content"></activity>
+        <activity android:name=".ForgotPassword"></activity>
+        <activity android:name=".Subject"></activity>
+        <activity android:name=".Topic"></activity>
     </application>
 
 </manifest>
