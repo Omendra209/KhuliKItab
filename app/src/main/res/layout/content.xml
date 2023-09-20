@@ -43,13 +43,13 @@
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
 
-            <VideoView
-                android:id="@+id/Vid"
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/player_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/video_logo">
 
-            </VideoView>
+            </com.google.android.exoplayer2.ui.PlayerView>
 
 
         </RelativeLayout>

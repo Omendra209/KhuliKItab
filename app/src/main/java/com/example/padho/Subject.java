@@ -21,7 +21,7 @@ public class Subject extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(Subject.this, "Hello", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(Subject.this, Topic.class));
+                startActivity(new Intent(Subject.this, ChapterList.class));
             }
         });
     }
