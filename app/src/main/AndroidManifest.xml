@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -30,6 +31,8 @@
         <activity android:name=".ForgotPassword"></activity>
         <activity android:name=".Subject"></activity>
         <activity android:name=".Topic"></activity>
+        <activity android:name=".textContent"></activity>
+        <activity android:name=".Quiz"></activity>
     </application>
 
 </manifest>

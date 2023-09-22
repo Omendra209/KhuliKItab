@@ -38,25 +38,16 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:clickable="true"
-                android:id="@+id/Chapter1"
+                android:id="@+id/chapter_1"
                 android:layout_width="match_parent"
-                android:layout_height="1.1in"
+                android:layout_height="0.5in"
                 android:layout_margin="5dp"
                 app:cardCornerRadius="5dp"
                 app:cardBackgroundColor="@color/white">
 
-                <ImageView
-                    android:layout_width="1in"
-                    android:layout_height="1in"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/boarder"
-                    android:elevation="3dp"/>
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="1in"
                     android:gravity="center"
                     android:textSize="25sp"
                     android:textColor="#87CEFA"
@@ -66,158 +57,114 @@
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/chapter_2"
                 android:layout_width="match_parent"
-                android:layout_height="1.1in"
+                android:layout_height="0.5in"
                 android:layout_margin="5dp"
                 app:cardCornerRadius="5dp"
                 app:cardBackgroundColor="@color/white">
 
-                <ImageView
-                    android:layout_width="1in"
-                    android:layout_height="1in"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/boarder"
-                    android:elevation="3dp"/>
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="1in"
                     android:gravity="center"
                     android:textSize="25sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"
-                    android:text="Chapter 1"/>
+                    android:text="Chapter 2"/>
 
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="1.1in"
+                android:layout_height="0.5in"
                 android:layout_margin="5dp"
                 app:cardCornerRadius="5dp"
                 app:cardBackgroundColor="@color/white">
 
-                <ImageView
-                    android:layout_width="1in"
-                    android:layout_height="1in"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/boarder"
-                    android:elevation="3dp"/>
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="1in"
                     android:gravity="center"
                     android:textSize="25sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"
-                    android:text="Chapter 1"/>
+                    android:text="Chapter 3"/>
 
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="1.1in"
+                android:layout_height="0.5in"
                 android:layout_margin="5dp"
                 app:cardCornerRadius="5dp"
                 app:cardBackgroundColor="@color/white">
 
-                <ImageView
-                    android:layout_width="1in"
-                    android:layout_height="1in"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/boarder"
-                    android:elevation="3dp"/>
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="1in"
                     android:gravity="center"
                     android:textSize="25sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"
-                    android:text="Chapter 1"/>
+                    android:text="Chapter 4"/>
 
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="1.1in"
+                android:layout_height="0.5in"
                 android:layout_margin="5dp"
                 app:cardCornerRadius="5dp"
                 app:cardBackgroundColor="@color/white">
 
-                <ImageView
-                    android:layout_width="1in"
-                    android:layout_height="1in"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/boarder"
-                    android:elevation="3dp"/>
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="1in"
                     android:gravity="center"
                     android:textSize="25sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"
-                    android:text="Chapter 1"/>
+                    android:text="Chapter 5"/>
 
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="1.1in"
+                android:layout_height="0.5in"
                 android:layout_margin="5dp"
                 app:cardCornerRadius="5dp"
                 app:cardBackgroundColor="@color/white">
 
-                <ImageView
-                    android:layout_width="1in"
-                    android:layout_height="1in"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/boarder"
-                    android:elevation="3dp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="1in"
                     android:gravity="center"
                     android:textSize="25sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"
-                    android:text="Chapter 1"/>
+                    android:text="Chapter 6"/>
 
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="1.1in"
+                android:layout_height="0.5in"
                 android:layout_margin="5dp"
                 app:cardCornerRadius="5dp"
                 app:cardBackgroundColor="@color/white">
 
-                <ImageView
-                    android:layout_width="1in"
-                    android:layout_height="1in"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/boarder"
-                    android:elevation="3dp"/>
+
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="1in"
                     android:gravity="center"
                     android:textSize="25sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"
-                    android:text="Chapter 1"/>
+                    android:text="Chapter 7"/>
 
 
             </androidx.cardview.widget.CardView>

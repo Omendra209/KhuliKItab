@@ -54,15 +54,16 @@
 
         </RelativeLayout>
 
+
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/textCon"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_margin="5dp"
-            android:background="@drawable/boarder"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
-
             <ImageView
                 android:layout_width="148dp"
                 android:layout_height="100dp"
@@ -75,7 +76,7 @@
                 android:layout_height="100dp"
                 android:gravity="center"
                 android:paddingLeft="1.1in"
-                android:text="Notes"
+                android:text="Text Content"
                 android:textColor="#87CEFA"
                 android:textSize="40dp"
                 android:textStyle="bold" />
@@ -83,6 +84,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/Go_To_Quiz"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_margin="5dp"
