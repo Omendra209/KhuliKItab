@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
+
 
     <application
         android:allowBackup="true"
@@ -20,15 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login"></activity>
-        <activity android:name=".Signup"></activity>
-        <activity android:name=".Dashboard"></activity>
-        <activity android:name=".ChapterList"></activity>
-        <activity android:name=".ClassPage"></activity>
-        <activity android:name=".Content"></activity>
-        <activity android:name=".ForgotPassword"></activity>
-        <activity android:name=".Subject"></activity>
-        <activity android:name=".Topic"></activity>
+        <activity android:name=".Login" />
+        <activity android:name=".Signup" />
+        <activity android:name=".Dashboard" />
+        <activity android:name=".ChapterList" />
+        <activity android:name=".ClassPage" />
+        <activity android:name=".Content" />
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".Subject" />
+        <activity android:name=".Topic" />
     </application>
 
 </manifest>
