@@ -59,9 +59,7 @@ public class Content extends AppCompatActivity {
                 player.setPlayWhenReady(true); // Auto-play
                 // Start downloading the video
                 downloadVideoLocally(uri, customDownloadDirectory, videoFileName);
-            }).addOnFailureListener(e -> {
-                Toast.makeText(Content.this, "Error loading video", Toast.LENGTH_SHORT).show();
-            });
+            }).addOnFailureListener(e -> Toast.makeText(Content.this, "Error loading video", Toast.LENGTH_SHORT).show());
         }
     }
 
