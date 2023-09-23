@@ -4,14 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+
+import com.example.padho.databinding.ActivityTopicBinding;
 
 public class Topic extends AppCompatActivity {
+    private ActivityTopicBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.topics);
-        CardView topic1 = findViewById(R.id.Topic1);
-        topic1.setOnClickListener(v -> startActivity(new Intent(Topic.this, Content.class)));
+        binding = ActivityTopicBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        binding.Topic1.setOnClickListener(v -> startActivity(new Intent(Topic.this, Content.class)));
     }
 }

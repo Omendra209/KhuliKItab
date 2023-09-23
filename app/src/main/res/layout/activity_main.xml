@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.37">
 
         <Button
-            android:id="@+id/LoginButton1"
+            android:id="@+id/login_button"
             style="@android:style/Widget.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
             tools:layout_marginTop="16dp" />
 
         <Button
-            android:id="@+id/SignupButton1"
+            android:id="@+id/signup_button"
             style="@android:style/Widget.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

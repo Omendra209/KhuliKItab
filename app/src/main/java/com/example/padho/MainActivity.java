@@ -7,26 +7,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.padho.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
-    private Button Login;
-    private Button Signup;
+    private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Login = findViewById(R.id.LoginButton1);
-        Signup = findViewById(R.id.SignupButton1);
-        Login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,com.example.padho.Login.class));
-            }
-        });
-        Signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,com.example.padho.Signup.class));
-            }
-        });
+        binding  = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        setListeners();
+    }
+
+    private void setListeners() {
+        binding.loginButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,com.example.padho.Login.class)));
+        binding.signupButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,com.example.padho.Signup.class)));
     }
 }

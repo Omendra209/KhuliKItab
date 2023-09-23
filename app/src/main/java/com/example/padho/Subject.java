@@ -2,27 +2,21 @@ package com.example.padho;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.padho.databinding.ActivitySubjectBinding;
 
 public class Subject extends AppCompatActivity {
-    private ImageButton UrduButton;
+    private ActivitySubjectBinding binding;
+
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.subject);
-        UrduButton = findViewById(R.id.imageView4);
-        UrduButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(Subject.this, "Hello", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(Subject.this, Topic.class));
-            }
-        });
+        binding = ActivitySubjectBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setListeners();
+    }
+
+    private void setListeners() {
+        binding.imageViewEnglish.setOnClickListener( v -> startActivity(new Intent(Subject.this, Topic.class)));
     }
 }

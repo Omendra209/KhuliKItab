@@ -2,36 +2,51 @@ package com.example.padho;
 
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.media3.ui.PlayerView;
 import androidx.media3.common.MediaItem;
 import androidx.media3.exoplayer.ExoPlayer;
+
+import com.example.padho.databinding.ActivityContentBinding;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import java.io.File;
 
 public class Content extends AppCompatActivity {
+    private ActivityContentBinding binding;
     private ExoPlayer player;
+    private StorageReference videoRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content);
+        binding = ActivityContentBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setListeners();
+        initialiseFirebase();
+        initializePlayer();
 
-        // Initialize ExoPlayer
-        PlayerView playerViewAndroid = findViewById(R.id.player_view);
-        player = new ExoPlayer.Builder(this).build();
-        playerViewAndroid.setPlayer(player);
+    }
 
-        // Firebase Storage reference to your video
+    private void setListeners() {
+        binding.textCon.setOnClickListener(v ->startActivity(new Intent(Content.this, TextContent.class)));
+        binding.goToQuiz.setOnClickListener(v ->startActivity(new Intent(Content.this, Quiz.class)));
+    }
+
+    private void initialiseFirebase() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference videoRef = storageRef.child("Class_1/Videos/This - That  English Grammar & Composition Grade 1  Periwinkle.mp4");
+        videoRef = storageRef.child("Class_1/Videos/This - That  English Grammar & Composition Grade 1  Periwinkle.mp4");
+    }
+
+    private void initializePlayer() {
+        player = new ExoPlayer.Builder(this).build();
+        binding.playerView.setPlayer(player);
 
         // Define the custom download directory path
         String customDownloadDirectory = "khuliKitab/video/";
@@ -43,46 +58,43 @@ public class Content extends AppCompatActivity {
         File localVideoFile = new File(downloadDirectory, videoFileName);
 
         if (localVideoFile.exists()) {
-            // Toast.makeText(Content.this, "Video already downloaded", Toast.LENGTH_SHORT).show();
-            // Video is already downloaded, load it from local storage
             MediaItem mediaItem = MediaItem.fromUri(Uri.fromFile(localVideoFile));
             player.setMediaItem(mediaItem);
             player.prepare();
             player.setPlayWhenReady(false); // Auto-play
         } else {
-            //Toast.makeText(Content.this, "Downloading video", Toast.LENGTH_SHORT).show();
-            // Video is not downloaded, load it from online source
             videoRef.getDownloadUrl().addOnSuccessListener(uri -> {
                 MediaItem mediaItem = MediaItem.fromUri(uri);
                 player.setMediaItem(mediaItem);
                 player.prepare();
-                player.setPlayWhenReady(true); // Auto-play
-                // Start downloading the video
+                player.setPlayWhenReady(true);
                 downloadVideoLocally(uri, customDownloadDirectory, videoFileName);
-            }).addOnFailureListener(e -> {
-                Toast.makeText(Content.this, "Error loading video", Toast.LENGTH_SHORT).show();
-            });
+            }).addOnFailureListener(e -> Toast.makeText(Content.this, "Error loading video", Toast.LENGTH_SHORT).show());
         }
     }
 
-    private void downloadVideoLocally(Uri videoUri, String downloadDirectory, String videoFileName) {
-        // Create a DownloadManager for downloading the video
-        DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
 
-        // Create a request for downloading
+    private void downloadVideoLocally(Uri videoUri, String downloadDirectory, String videoFileName) {
+        DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(videoUri);
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
                 .setAllowedOverRoaming(true)
-                .setTitle("Downloading Video")
-                .setDescription("Download in progress")
+                .setTitle("Downloading Chapter Video")
+                .setDescription("Chapter Video is being downloaded")
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-
-        // Set the destination directory to the public external storage directory
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, downloadDirectory+videoFileName);
-
-        // Enqueue the download and start it
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, downloadDirectory + videoFileName);
         downloadManager.enqueue(request);
+    }
 
+
+    protected void onPause() {
+        super.onPause();
+        player.release();
+    }
+
+    protected void onStop() {
+        super.onStop();
+        player.release();
     }
 
     @Override
