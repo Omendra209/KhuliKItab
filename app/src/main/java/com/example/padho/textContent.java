@@ -63,13 +63,13 @@ public class textContent extends AppCompatActivity {
         textFileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                downloadTextFileLocally(uri,customDownloadDirectoryDoc,"text1.txt");
+                downloadTextFileLocally(uri,customDownloadDirectoryDoc,"text1Text.txt");
             }
         });
     }
     private String loadTextFromLocal(String customDirectory) {
         try {
-            File file = new File(getFilesDir()+File.separator+customDirectory, "text1.txt");
+            File file = new File(getFilesDir()+File.separator+customDirectory, "text1Text.txt");
             FileInputStream fis = new FileInputStream(file);
             byte[] buffer = new byte[(int) file.length()];
             fis.read(buffer);
