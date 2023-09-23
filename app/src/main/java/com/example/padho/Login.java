@@ -23,18 +23,12 @@ public class Login extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // For user stay login
-        checkFireBaseLoggedIn();
+
 
         setListeners();
     }
 
-    private void checkFireBaseLoggedIn() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user!=null){
-            startActivity(new Intent(Login.this,Subject.class));
-            finish();
-        }
-    }
+
 
     private void setListeners() {
         binding.LoginButton.setOnClickListener(view -> {

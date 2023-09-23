@@ -118,9 +118,9 @@ public class Content extends AppCompatActivity {
         return new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileTypeDownloadDirectory + videoFileName);
     }
 
-    private void downloadFileLocally(Uri videoUri, String downloadDirectory, String videoFileName, String downloadTitle, String downloadDescription) {
+    private void downloadFileLocally(Uri fileUri, String downloadDirectory, String videoFileName, String downloadTitle, String downloadDescription) {
         DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        DownloadManager.Request request = new DownloadManager.Request(videoUri);
+        DownloadManager.Request request = new DownloadManager.Request(fileUri);
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
                 .setAllowedOverRoaming(true)
                 .setTitle(downloadTitle)

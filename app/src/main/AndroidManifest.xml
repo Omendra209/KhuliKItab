@@ -19,13 +19,11 @@
         android:theme="@style/Theme.Padho"
         tools:targetApi="31">
         <activity
-            android:name=".Quiz"
-            android:exported="false" />
+            android:name=".Quiz"></activity>
         <activity
-            android:name=".TextContent"
-            android:exported="false" />
+            android:name=".TextContent" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,6 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".Login" />
         <activity android:name=".Signup" />
         <activity android:name=".Dashboard" />
