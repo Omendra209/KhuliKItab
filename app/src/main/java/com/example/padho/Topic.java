@@ -15,6 +15,22 @@ public class Topic extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityTopicBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.Topic1.setOnClickListener(v -> startActivity(new Intent(Topic.this, Content.class)));
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("testKey")) {
+            String subject = intent.getStringExtra("testKey");
+            binding.textViewTopic.setText(subject);
+        }
+
+        setListeners();
+    }
+
+    private void setListeners() {
+        binding.Topic1.setOnClickListener(v -> {
+                startActivity(new Intent(Topic.this, Content.class));
+        });
+        binding.Topic2.setOnClickListener(v -> {
+                startActivity(new Intent(Topic.this, Content.class));
+        });
     }
 }

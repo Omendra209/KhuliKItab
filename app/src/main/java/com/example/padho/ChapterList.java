@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import com.example.padho.databinding.ActivityChapterListBinding;
 
@@ -15,6 +14,24 @@ public class ChapterList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityChapterListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.chapter1.setOnClickListener(v -> startActivity(new Intent(ChapterList.this, Topic.class)));
+
+        setListeners();
+
+
+    }
+
+    private void setListeners() {
+        binding.chapter1.setOnClickListener(v -> {
+            String textTOSend = binding.textViewChapter1.getText().toString();
+            Intent intent = new Intent(ChapterList.this, TextContent.class);
+            intent.putExtra("textKey", textTOSend);
+            startActivity(intent);
+        });
+        binding.chapter2.setOnClickListener(v -> {
+            String textTOSend = binding.textViewChapter2.getText().toString();
+            Intent intent = new Intent(ChapterList.this, TextContent.class);
+            intent.putExtra("textKey", textTOSend);
+            startActivity(intent);
+        });
     }
 }
