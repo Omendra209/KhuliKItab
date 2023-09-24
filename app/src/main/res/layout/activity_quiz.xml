@@ -213,7 +213,25 @@
             android:layout_marginTop="32dp"
             android:text="Submit" />
 
+        <!-- Previous Score TextView -->
 
+        <TextView
+            android:id="@+id/previousScoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/submitButton"
+            android:text="Previous Score: "
+            android:textSize="18sp"/>
+
+
+        <!-- Current Score TextView -->
+        <TextView
+            android:id="@+id/currentScoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/previousScoreTextView"
+            android:text="Current Score: "
+            android:textSize="18sp" />
 
     </RelativeLayout>
 

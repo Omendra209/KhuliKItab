@@ -14,9 +14,11 @@ public class Subject extends AppCompatActivity {
         binding = ActivitySubjectBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setListeners();
+
     }
 
     private void setListeners() {
+        binding.progressBar.setOnClickListener(view -> startActivity(new Intent(this, ChatAI.class)));
         binding.imageViewEnglish.setOnClickListener( v -> startActivity(new Intent(Subject.this, Topic.class)));
     }
 }

@@ -54,7 +54,7 @@
                     android:textSize="25sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"
-                    android:text="A to F Alphabets"/>
+                    android:text="1. The dog and a Bone "/>
 
 
             </androidx.cardview.widget.CardView>
@@ -75,7 +75,7 @@
                     android:textSize="25sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"
-                    android:text="G to L Alphabets"/>
+                    android:text="Topic"/>
 
 
             </androidx.cardview.widget.CardView>
@@ -93,7 +93,7 @@
                     android:textSize="25sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"
-                    android:text="M to Q Alphabets"/>
+                    android:text="Topic"/>
 
 
             </androidx.cardview.widget.CardView>
@@ -111,7 +111,7 @@
                     android:textSize="25sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"
-                    android:text="A to F Alphabets"/>
+                    android:text="Topic"/>
 
 
             </androidx.cardview.widget.CardView>
@@ -129,7 +129,7 @@
                     android:textSize="25sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"
-                    android:text="R to V Alphabets"/>
+                    android:text="Topic"/>
 
 
             </androidx.cardview.widget.CardView>
@@ -148,7 +148,7 @@
                     android:textSize="25sp"
                     android:textColor="#87CEFA"
                     android:textStyle="bold"
-                    android:text="W to Z Alphabets"/>
+                    android:text="Topic"/>
 
 
             </androidx.cardview.widget.CardView>

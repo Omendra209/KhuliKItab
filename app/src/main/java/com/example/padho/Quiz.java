@@ -9,6 +9,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.padho.databinding.ActivityQuizBinding;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.nio.charset.StandardCharsets;
 
 public class Quiz extends AppCompatActivity {
     private ActivityQuizBinding binding;
@@ -19,6 +26,8 @@ public class Quiz extends AppCompatActivity {
         binding = ActivityQuizBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        FirebaseApp.initializeApp(this);
+        displayPreviousScore();
         setListeners();
     }
 
@@ -29,6 +38,36 @@ public class Quiz extends AppCompatActivity {
             displayScore(score);
 
             // You can also perform other actions here, like showing correct answers, etc.
+            // Get the current user
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user != null) {
+                String userUid = user.getUid();
+                int newScore = score; // Replace with the user's new quiz score
+
+                // Get a reference to the Firebase Storage instance
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+
+                // Create storage references to the user's score files
+                StorageReference previousScoreRef = storage.getReference().child("scores/" + userUid + "/previous_score.txt");
+                StorageReference currentScoreRef = storage.getReference().child("scores/" + userUid + "/current_score.txt");
+
+                // Convert the score to a string and store it in the file
+                String scoreAsString = String.valueOf(newScore);
+
+                // Update the previous score file with the current score
+                previousScoreRef.putBytes(scoreAsString.getBytes(StandardCharsets.UTF_8))
+                        .addOnSuccessListener(taskSnapshot -> {
+                            // Score updated successfully
+                            System.out.println("Previous score updated successfully!");
+                        })
+                        .addOnFailureListener(exception -> {
+                            // Handle any errors
+                            System.err.println("Error updating previous score: " + exception.getMessage());
+                        });
+
+                // Display the new current score
+                binding.currentScoreTextView.setText("Current Score: " + newScore);
+            }
         });
     }
 
@@ -52,21 +91,21 @@ public class Quiz extends AppCompatActivity {
         }
 
         RadioGroup question3RadioGroup = binding.question3RadioGroup;
-        int selectedOption3Id = question1RadioGroup.getCheckedRadioButtonId();
-        RadioButton selectedOption3 = findViewById(selectedOption1Id);
+        int selectedOption3Id = question3RadioGroup.getCheckedRadioButtonId();
+        RadioButton selectedOption3 = findViewById(selectedOption3Id);
         if (selectedOption3 != null && selectedOption3.getText().toString().equals("red")) {
             score++;
         }
 
         RadioGroup question4RadioGroup = binding.question4RadioGroup;
-        int selectedOption4Id = question1RadioGroup.getCheckedRadioButtonId();
-        RadioButton selectedOption4 = findViewById(selectedOption1Id);
+        int selectedOption4Id = question4RadioGroup.getCheckedRadioButtonId();
+        RadioButton selectedOption4 = findViewById(selectedOption4Id);
         if (selectedOption4 != null && selectedOption4.getText().toString().equals("cat")) {
             score++;
         }
 
         RadioGroup question5RadioGroup = binding.question5RadioGroup;
-        int selectedOption5Id = question1RadioGroup.getCheckedRadioButtonId();
+        int selectedOption5Id = question5RadioGroup.getCheckedRadioButtonId();
         RadioButton selectedOption5 = findViewById(selectedOption5Id);
         if (selectedOption5 != null && selectedOption5.getText().toString().equals("bit")) {
             score++;
@@ -76,6 +115,46 @@ public class Quiz extends AppCompatActivity {
         return score;
     }
 
+    private void displayPreviousScore() {
+        // Get the current user
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String userUid = user.getUid();
+
+            // Get a reference to the Firebase Storage instance
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+
+            // Create a storage reference to the previous score file
+            StorageReference previousScoreRef = storage.getReference().child("scores/" + userUid + "/previous_score.txt");
+
+            // Check if the previous score file exists
+            previousScoreRef.getMetadata()
+                    .addOnSuccessListener(metadata -> {
+                        if (metadata.getSizeBytes() > 0) {
+                            // The file exists, proceed to download it
+                            previousScoreRef.getBytes(1024 * 1024)
+                                    .addOnSuccessListener(bytes -> {
+                                        String previousScoreAsString = new String(bytes, StandardCharsets.UTF_8);
+                                        long previousScore = Long.parseLong(previousScoreAsString);
+
+                                        // Display the previous score
+                                        binding.previousScoreTextView.setText("Previous Score: " + previousScore);
+                                    })
+                                    .addOnFailureListener(exception -> {
+                                        // Handle any errors while downloading the previous score file
+                                        System.err.println("Error downloading previous score: " + exception.getMessage());
+                                    });
+                        } else {
+                            // The file does not exist, handle accordingly (e.g., display a default score)
+                            binding.previousScoreTextView.setText("Previous Score: N/A");
+                        }
+                    })
+                    .addOnFailureListener(exception -> {
+                        // Handle metadata retrieval failure
+                        System.err.println("Error checking previous score existence: " + exception.getMessage());
+                    });
+        }
+    }
     private void displayScore(int score) {
         String message = "Your score is: " + score;
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

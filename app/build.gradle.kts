@@ -30,7 +30,13 @@ android {
     viewBinding {
         enable = true
     }
+    packaging {
+        resources {
+            excludes.add("META-INF/INDEX.LIST")
+            excludes.add("META-INF/DEPENDENCIES")
+        }
 }
+
 
 dependencies {
 
@@ -45,8 +51,10 @@ dependencies {
     implementation ("androidx.media3:media3-session:1.1.1")
     implementation ("androidx.media3:media3-exoplayer:1.1.1")
     implementation("androidx.media3:media3-common:1.1.1")
-
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation ("com.google.cloud:google-cloud-translate:2.23.0")
     implementation("com.google.firebase:firebase-ml-natural-language:22.0.1")
     implementation("com.google.android.gms:play-services-mlkit-text-recognition:19.0.0")
     implementation("com.google.android.gms:play-services-mlkit-language-id:17.0.0")
-}
+}}
