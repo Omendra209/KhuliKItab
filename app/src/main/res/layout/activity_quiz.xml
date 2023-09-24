@@ -1,78 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:ignore="ExtraText">
 
-    <!-- Question 1 -->
-    <TextView
-        android:id="@+id/question1TextView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Question 1: What is the capital of France?"
-        android:textSize="18sp" />
+        android:layout_height="wrap_content">
 
-    <!-- Radio Buttons for Question 1 -->
-    <RadioGroup
-        android:id="@+id/question1RadioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/question1TextView">
+        <!-- Question 1 -->
+        <TextView
+            android:id="@+id/question1TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Question 1: Which word has a short/e/sound?"
+            android:textSize="18sp" />
 
-        <RadioButton
-            android:id="@+id/option1Q1RadioButton"
+        <!-- Radio Buttons for Question 1 -->
+        <RadioGroup
+            android:id="@+id/question1RadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/question1TextView">
+
+            <RadioButton
+                android:id="@+id/option1Q1RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="bad" />
+
+            <RadioButton
+                android:id="@+id/option2Q1RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="bee" />
+
+            <RadioButton
+                android:id="@+id/option3Q1RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="bed" />
+
+            <!-- Add more options if needed -->
+        </RadioGroup>
+
+
+        <!-- Question 2 -->
+
+        <TextView
+            android:id="@+id/question2TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/question1RadioGroup"
+            android:layout_marginTop="16dp"
+            android:text="Question 2: Which word has a short a sound?"
+            android:textSize="18sp" />
+
+        <!-- Radio Buttons for Question 2 -->
+        <RadioGroup
+            android:id="@+id/question2RadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/question2TextView">
+
+            <RadioButton
+                android:id="@+id/option1Q2RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="cap" />
+
+            <RadioButton
+                android:id="@+id/option2Q2RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="cup" />
+            <RadioButton
+                android:id="@+id/option3Q2RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="cape" />
+
+            <!-- Add more options if needed -->
+        </RadioGroup>
+
+
+
+        <!-- Question 3 -->
+
+        <TextView
+            android:id="@+id/question3TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/question2RadioGroup"
+            android:layout_marginTop="16dp"
+            android:text="Question 3: Which word has a short e sound?"
+            android:textSize="18sp" />
+
+        <!-- Radio Buttons for Question 3 -->
+        <RadioGroup
+            android:id="@+id/question3RadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/question3TextView">
+
+            <RadioButton
+                android:id="@+id/option1Q3RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="red" />
+
+            <RadioButton
+                android:id="@+id/option2Q3RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="rad" />
+            <RadioButton
+                android:id="@+id/option3Q3RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="rid" />
+
+            <!-- Add more options if needed -->
+        </RadioGroup>
+
+        <!-- Question 4 -->
+
+        <TextView
+            android:id="@+id/question4TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/question3RadioGroup"
+            android:layout_marginTop="16dp"
+            android:text="Question 4: Which word has a hard c sound?"
+            android:textSize="18sp" />
+
+        <!-- Radio Buttons for Question 3 -->
+        <RadioGroup
+            android:id="@+id/question4RadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/question4TextView">
+
+            <RadioButton
+                android:id="@+id/option1Q4RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="cat" />
+
+            <RadioButton
+                android:id="@+id/option2Q4RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="cookie" />
+            <RadioButton
+                android:id="@+id/option3Q4RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="carrot" />
+
+            <!-- Add more options if needed -->
+        </RadioGroup>
+
+
+        <!-- Question 5 -->
+
+        <TextView
+            android:id="@+id/question5TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/question4RadioGroup"
+            android:layout_marginTop="16dp"
+            android:text="Question 5: Which word has a short i sound?"
+            android:textSize="18sp" />
+
+        <!-- Radio Buttons for Question 5 -->
+        <RadioGroup
+            android:id="@+id/question5RadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/question5TextView">
+
+            <RadioButton
+                android:id="@+id/option1Q5RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="bit" />
+
+            <RadioButton
+                android:id="@+id/option2Q5RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="bite" />
+            <RadioButton
+                android:id="@+id/option3Q5RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="bee" />
+
+            <!-- Add more options if needed -->
+        </RadioGroup>
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Paris" />
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/question5RadioGroup"
+            android:layout_marginTop="32dp"
+            android:text="Submit" />
 
-        <RadioButton
-            android:id="@+id/option2Q1RadioButton"
+        <!-- Previous Score TextView -->
+
+        <TextView
+            android:id="@+id/previousScoreTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="London" />
+            android:layout_below="@id/submitButton"
+            android:text="Previous Score: "
+            android:textSize="18sp"/>
 
-        <!-- Add more options if needed -->
-    </RadioGroup>
 
-    <!-- Question 2 -->
-    <TextView
-        android:id="@+id/question2TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/question1RadioGroup"
-        android:layout_marginTop="16dp"
-        android:text="Question 2: What is 2 + 2?"
-        android:textSize="18sp" />
-
-    <!-- Radio Buttons for Question 2 -->
-    <RadioGroup
-        android:id="@+id/question2RadioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/question2TextView">
-
-        <RadioButton
-            android:id="@+id/option1Q2RadioButton"
+        <!-- Current Score TextView -->
+        <TextView
+            android:id="@+id/currentScoreTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3" />
+            android:layout_below="@id/previousScoreTextView"
+            android:text="Current Score: "
+            android:textSize="18sp" />
 
-        <RadioButton
-            android:id="@+id/option2Q2RadioButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4" />
+    </RelativeLayout>
 
-        <!-- Add more options if needed -->
-    </RadioGroup>
-
-    <!-- Submit Button -->
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/question2RadioGroup"
-        android:layout_marginTop="32dp"
-        android:text="Submit" />
-</RelativeLayout>
+</ScrollView>
