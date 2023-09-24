@@ -1,11 +1,9 @@
 package com.example.padho;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.padho.databinding.ActivityMainBinding;
 
@@ -19,6 +17,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setListeners();
+
+        testAPI();
+    }
+
+    private void testAPI() {
+//        ChatCompletionAI.chatCompletionRequest("What is value of gravity");
     }
 
     private void setListeners() {

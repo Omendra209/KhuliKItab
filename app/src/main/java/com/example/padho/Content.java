@@ -6,13 +6,24 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.OptIn;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.media3.common.MediaItem;
+import androidx.media3.common.MediaMetadata;
+import androidx.media3.common.util.UnstableApi;
+import androidx.media3.datasource.DataSource;
+import androidx.media3.datasource.DefaultDataSourceFactory;
 import androidx.media3.exoplayer.ExoPlayer;
+import androidx.media3.exoplayer.source.MediaSource;
+import androidx.media3.exoplayer.source.MergingMediaSource;
+import androidx.media3.exoplayer.source.ProgressiveMediaSource;
 
+import com.example.padho.Utilities.TranslateUtility;
 import com.example.padho.databinding.ActivityContentBinding;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -21,10 +32,21 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-
-public class Content extends AppCompatActivity {
+@UnstableApi public class Content extends AppCompatActivity {
     private ActivityContentBinding binding;
+    @OptIn(markerClass = androidx.media3.common.util.UnstableApi.class)
     private ExoPlayer player;
+
+    //link of audio and video
+   /* private int selectedAudioTrack = 0; // 2 for English, 0 for Hindi, 1 for Urdu
+    private final String[] audioUrls = {
+            "Class_1/Videos/Story/Hindi_audio_story_2.mp3",
+            "Class_1/Videos/Story/urdu_story_2.m4a",
+            "Class_1/Videos/Story/English_audio_story_2.mp3" // Add the URL for the third audio track
+
+    };*/
+
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +56,45 @@ public class Content extends AppCompatActivity {
         setListeners();
         initializeTextContent();
         initializeVideoPlayer();
+
+
+        //
+        binding.hindi.setOnClickListener(view -> {
+//            selectedAudioTrack = 0;
+//            updateAudioTrack(audioUrls[selectedAudioTrack]);
+            new Thread(() -> {
+                String currentContent = binding.topicText.getText().toString();
+                String translatedContent = TranslateUtility.translateTextGoogle(this, currentContent, "Hi");
+                handler.post(() -> {
+                    binding.topicText.setText(translatedContent);
+                });
+            }).start();
+        });
+        binding.urdu.setOnClickListener(view -> {
+//            selectedAudioTrack = 0;
+//            updateAudioTrack(audioUrls[selectedAudioTrack]);
+            new Thread(() -> {
+                String currentContent = binding.topicText.getText().toString();
+                String translatedContent = TranslateUtility.translateTextGoogle(this, currentContent, "Ur");
+                handler.post(() -> {
+                    binding.topicText.setText(translatedContent);
+                });
+            }).start();
+        });
+        binding.english.setOnClickListener(view -> {
+//            selectedAudioTrack = 0;
+//            updateAudioTrack(audioUrls[selectedAudioTrack]);
+            new Thread(() -> {
+                String currentContent = binding.topicText.getText().toString();
+                String translatedContent = TranslateUtility.translateTextGoogle(this, currentContent, "En");
+                handler.post(() -> {
+                    binding.topicText.setText(translatedContent);
+                });
+            }).start();
+        });
     }
 
     private void setListeners() {
-//        binding.goToQuiz.setOnClickListener(v ->startActivity(new Intent(Content.this, TextContent.class)));
-//        binding.textCon.setOnClickListener(v ->startActivity(new Intent(Content.this, TextContent.class)));
         binding.goToQuiz.setOnClickListener(v ->startActivity(new Intent(Content.this, Quiz.class)));
     }
 
@@ -51,7 +107,7 @@ public class Content extends AppCompatActivity {
     private void initializeTextContent() {
         // Define the custom download directory path
         String customDownloadDirectory = "khuliKitab/text/";
-        String fileName = "Chapter_1_Topic_1_Text.txt";
+        String fileName = "story 2.txt";
         File localFile = fullFilePath(customDownloadDirectory, fileName);
 
         if (localFile.exists()) {
@@ -59,7 +115,7 @@ public class Content extends AppCompatActivity {
 //             Text file is available locally, use it
             binding.topicText.setText(localText);
         } else {
-            StorageReference textFileRef = initializeFirebaseStorageReference("Class_1/Text/topic1Text.txt");
+            StorageReference textFileRef = initializeFirebaseStorageReference("Class_1/Text/story 2.txt");
             textFileRef.getBytes(1024 * 1024) // Set the maximum file size (1MB in this case)
                     .addOnSuccessListener(bytes -> {
                         String text = new String(bytes, StandardCharsets.UTF_8);
@@ -93,7 +149,7 @@ public class Content extends AppCompatActivity {
 
         // Define the custom download directory path
         String customDownloadDirectory = "khuliKitab/video/";
-        String fileName = "Chapter_1_Topic_1_Video.mp4";
+        String fileName = "story_2.mp4";
         File localFile = fullFilePath(customDownloadDirectory, fileName);
 
         if (localFile.exists()) {
@@ -102,15 +158,75 @@ public class Content extends AppCompatActivity {
             player.prepare();
             player.setPlayWhenReady(false); // Auto-play
         } else {
-            StorageReference videoRef = initializeFirebaseStorageReference("Class_1/Videos/English/Chapter_1_Topic_1_Video.mp4");
+            StorageReference videoRef = initializeFirebaseStorageReference("Class_1/Videos/Story/story_2.mp4");
+            StorageReference hindiAudioRef = initializeFirebaseStorageReference("Class_1/Videos/Story/Hindi_audio_story_2.mp3");
+            StorageReference urduAudioRef = initializeFirebaseStorageReference("Class_1/Videos/Story/urdu_story_2.m4a");
+            StorageReference englishAudioRef = initializeFirebaseStorageReference("Class_1/Videos/Story/English_audio_story_2.mp3");
 
-            videoRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                MediaItem mediaItem = MediaItem.fromUri(uri);
-                player.setMediaItem(mediaItem);
-                player.prepare();
-                player.setPlayWhenReady(true);
-                downloadFileLocally(uri, customDownloadDirectory, fileName, "Downloading "+fileName, "Download in progress");
-            }).addOnFailureListener(e -> Toast.makeText(Content.this, "Error loading video", Toast.LENGTH_SHORT).show());
+            videoRef.getDownloadUrl().addOnSuccessListener(videoUri -> {
+                String videoUrl = videoUri.toString();
+
+                hindiAudioRef.getDownloadUrl().addOnSuccessListener(hindiAudioUri -> {
+                    String hindiAudioUrl = hindiAudioUri.toString();
+
+                    urduAudioRef.getDownloadUrl().addOnSuccessListener(urduAudioUri -> {
+                        String urduAudioUrl = urduAudioUri.toString();
+
+                        englishAudioRef.getDownloadUrl().addOnSuccessListener(englishAudioUri -> {
+                            String englishAudioUrl = englishAudioUri.toString();
+
+                            // Create a DataSource.Factory for media sources
+                            DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this, "user-agent");
+
+
+                            // Create a MediaMetadata for each audio source
+                            MediaMetadata hindiAudioMetadata = new MediaMetadata.Builder()
+                                    .setTitle("Hindi")
+                                    .build();
+
+                            MediaMetadata urduAudioMetadata = new MediaMetadata.Builder()
+                                    .setTitle("Urdu")
+                                    .build();
+
+                            MediaMetadata englishAudioMetadata = new MediaMetadata.Builder()
+                                    .setTitle("English")
+                                    .build();
+
+                            // Create a MediaSource for the video
+                            MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory)
+                                    .createMediaSource(MediaItem.fromUri(Uri.parse(videoUrl)));
+
+                            // Create a MediaSource for the Hindi audio
+                            MediaSource hindiAudioSource = new ProgressiveMediaSource.Factory(dataSourceFactory)
+                                    .createMediaSource(MediaItem.fromUri(Uri.parse(hindiAudioUrl)));
+
+                            // Create a MediaSource for the Urdu audio
+                            MediaSource urduAudioSource = new ProgressiveMediaSource.Factory(dataSourceFactory)
+                                    .createMediaSource(MediaItem.fromUri(Uri.parse(urduAudioUrl)));
+
+                            // Create a MediaSource for the English audio
+                            MediaSource englishAudioSource = new ProgressiveMediaSource.Factory(dataSourceFactory)
+                                    .createMediaSource(MediaItem.fromUri(Uri.parse(englishAudioUrl)));
+
+                            // Merge the video and audio sources
+                            MediaSource mergedSource = new MergingMediaSource(
+                                    new MediaSource[]{videoSource, hindiAudioSource, urduAudioSource, englishAudioSource});
+
+                            // Set the merged media source to the player
+                            player.setMediaSource(mergedSource);
+
+                            // Prepare the player
+                            player.prepare();
+                            player.setPlayWhenReady(true);
+
+                        });
+                    });
+                });
+            });
+            videoRef.getDownloadUrl().addOnFailureListener(e -> {
+                Log.e("TAG", "Error loading video: " + e.getMessage());
+                Toast.makeText(Content.this, "Error loading video: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            });
         }
     }
 
@@ -130,6 +246,20 @@ public class Content extends AppCompatActivity {
         downloadManager.enqueue(request);
     }
 
+    private void updateAudioTrack(String audioUrl) {
+        // Release the current ExoPlayer instance
+        player.release();
+
+        // Create a new ExoPlayer instance
+        player = new ExoPlayer.Builder(this).build();
+        binding.playerView.setPlayer(player);
+
+        // Set the media item with the new audio URL
+        MediaItem mediaItem = MediaItem.fromUri(audioUrl);
+        player.setMediaItem(mediaItem);
+        player.prepare();
+        player.setPlayWhenReady(true);
+    }
     @Override
     protected void onPause() {
         super.onPause();
