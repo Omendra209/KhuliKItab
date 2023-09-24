@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,15 @@ public class Content extends AppCompatActivity {
     private ActivityContentBinding binding;
     private ExoPlayer player;
 
+    //link of audio and video
+    private int selectedAudioTrack = 0; // 2 for English, 0 for Hindi, 1 for Urdu
+    private String[] audioUrls = {
+            "Class_1/Videos/Story/Hindi audio story 2.mp3",
+            "Class_1/Videos/Story/urdu story 2.m4a",
+            "Class_1/Videos/Story/English audio story 2.mp3" // Add the URL for the third audio track
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +44,29 @@ public class Content extends AppCompatActivity {
         setListeners();
         initializeTextContent();
         initializeVideoPlayer();
+
+        //
+        binding.hindi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedAudioTrack = 0;
+                updateAudioTrack(audioUrls[selectedAudioTrack]);
+            }
+        });
+        binding.urdu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedAudioTrack = 1;
+                updateAudioTrack(audioUrls[selectedAudioTrack]);
+            }
+        });
+        binding.english.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedAudioTrack = 2;
+                updateAudioTrack(audioUrls[selectedAudioTrack]);
+            }
+        });
     }
 
     private void setListeners() {
@@ -51,7 +84,7 @@ public class Content extends AppCompatActivity {
     private void initializeTextContent() {
         // Define the custom download directory path
         String customDownloadDirectory = "khuliKitab/text/";
-        String fileName = "Chapter_1_Topic_1_Text.txt";
+        String fileName = "story 2.txt";
         File localFile = fullFilePath(customDownloadDirectory, fileName);
 
         if (localFile.exists()) {
@@ -59,7 +92,7 @@ public class Content extends AppCompatActivity {
 //             Text file is available locally, use it
             binding.topicText.setText(localText);
         } else {
-            StorageReference textFileRef = initializeFirebaseStorageReference("Class_1/Text/topic1Text.txt");
+            StorageReference textFileRef = initializeFirebaseStorageReference("Class_1/Text/story 2.txt");
             textFileRef.getBytes(1024 * 1024) // Set the maximum file size (1MB in this case)
                     .addOnSuccessListener(bytes -> {
                         String text = new String(bytes, StandardCharsets.UTF_8);
@@ -93,7 +126,7 @@ public class Content extends AppCompatActivity {
 
         // Define the custom download directory path
         String customDownloadDirectory = "khuliKitab/video/";
-        String fileName = "Chapter_1_Topic_1_Video.mp4";
+        String fileName = "story 2.mp4";
         File localFile = fullFilePath(customDownloadDirectory, fileName);
 
         if (localFile.exists()) {
@@ -102,7 +135,7 @@ public class Content extends AppCompatActivity {
             player.prepare();
             player.setPlayWhenReady(false); // Auto-play
         } else {
-            StorageReference videoRef = initializeFirebaseStorageReference("Class_1/Videos/English/Chapter_1_Topic_1_Video.mp4");
+            StorageReference videoRef = initializeFirebaseStorageReference("Class_1/Videos/English/story 2.mp4");
 
             videoRef.getDownloadUrl().addOnSuccessListener(uri -> {
                 MediaItem mediaItem = MediaItem.fromUri(uri);
@@ -130,6 +163,20 @@ public class Content extends AppCompatActivity {
         downloadManager.enqueue(request);
     }
 
+    private void updateAudioTrack(String audioUrl) {
+        // Release the current ExoPlayer instance
+        player.release();
+
+        // Create a new ExoPlayer instance
+        player = new ExoPlayer.Builder(this).build();
+        binding.playerView.setPlayer(player);
+
+        // Set the media item with the new audio URL
+        MediaItem mediaItem = MediaItem.fromUri(audioUrl);
+        player.setMediaItem(mediaItem);
+        player.prepare();
+        player.setPlayWhenReady(true);
+    }
     @Override
     protected void onPause() {
         super.onPause();
